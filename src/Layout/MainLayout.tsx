@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-hidden">
       <header className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
@@ -12,9 +12,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             </Link>
 
             <nav className="flex space-x-6">
-              <Link to={ROUTES.HOME} className="hover:underline">
-                Home
-              </Link>
               <Link to={ROUTES.RANDOM_DRAW} className="hover:underline">
                 Random Draw
               </Link>

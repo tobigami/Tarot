@@ -25,7 +25,7 @@ export default function RandomDrawPage() {
   const placeholderRefs = useRef<(HTMLDivElement | null)[]>([]);
   const navigate = useNavigate();
 
-  const totalCards = 50; // Total number of cards to render
+  const totalCards = 25; // Total number of cards to render
   const cardWidth = 100;
 
   // Ref for the container element
@@ -432,6 +432,14 @@ export default function RandomDrawPage() {
             <Button
               variant="outline"
               size="lg"
+              className="w-1/3 border-purple-500 text-purple-700"
+              onClick={() => setSelectedCards([])}
+            >
+              Reset
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
               className={cn(
                 'border-purple-500 text-purple-700 hover:bg-purple-200 transition-all',
                 selectedCards.length === 0 && !isShuffling
@@ -665,22 +673,15 @@ export default function RandomDrawPage() {
             <Button
               variant="outline"
               size="lg"
-              className="w-1/3 border-purple-500 text-purple-700"
+              className="w-1/2 border-purple-500 text-purple-700"
               onClick={() => setShowCardSelection(false)}
             >
               Back
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-1/3 border-purple-500 text-purple-700"
-              onClick={() => setSelectedCards([])}
-            >
-              Reset
-            </Button>
+
             <Button
               size="lg"
-              className="w-1/3 bg-purple-800 hover:bg-purple-700 text-white"
+              className="w-1/2 bg-purple-800 hover:bg-purple-700 text-white"
               onClick={handleDrawCards}
               disabled={selectedCards.length !== cardCount}
             >
