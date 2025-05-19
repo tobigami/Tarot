@@ -1,6 +1,89 @@
 import { Button } from '@/components/ui/button';
-import { ROUTES } from '@/Constant/routes.enum';
-import { useState, useEffect, useRef } from 'react';
+import { ROUTES } from '@/Constan  const handleCardClick = (index: number) => {
+    // If card is already selected or shuffling is in progress, ignore
+    if (selectedCards.includes(index) || isShuffling) {
+      return;
+    }
+
+    // If we haven't selected enough cards yet, add this one
+    if (selectedCards.length < cardCount) {
+      // Play card flip sound
+      playSound(SOUNDS.CARD_FLIP, 0.4);
+
+      // Generate a random card ID (0-21 for major arcana)
+      const randomCardId = Math.floor(Math.random() * 78);
+      setSelectedCards([...selectedCards, index]);
+      setRevealedCards([...revealedCards, { index, cardId: randomCardId }]);
+    }
+  };
+  
+  // Handle resetting the card selection and order
+  const handleReset = () => {
+    setSelectedCards([]);
+    setRevealedCards([]);
+    // Reset card order to original
+    setCardOrder(Array.from({ length: totalCards }, (_, i) => i));
+  };
+
+  // Drag and drop handlers
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    // Prevent drag when shuffling or already selected
+    if (isShuffling || selectedCards.includes(index)) {
+      e.preventDefault();
+      return;
+    }
+    
+    // Play a soft sound when starting to drag
+    playSound(SOUNDS.CARD_FLIP, 0.2);
+    
+    // Set dragged card
+    setDraggedCard(index);
+    
+    // Set data for the drag operation
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', index.toString());
+  };
+
+  const handleDragEnd = () => {
+    setDraggedCard(null);
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = (e: React.DragEvent, targetIndex: number) => {
+    e.preventDefault();
+    
+    if (draggedCard === null || draggedCard === targetIndex || isShuffling) {
+      return;
+    }
+    
+    // Play card place sound
+    playSound(SOUNDS.CARD_PLACE, 0.3);
+    
+    // Get the current positions in the order
+    const sourceOrderIndex = cardOrder.indexOf(draggedCard);
+    const targetOrderIndex = cardOrder.indexOf(targetIndex);
+    
+    // Create a new order array by swapping positions
+    const newOrder = [...cardOrder];
+    
+    // Simple swap for two cards
+    if (totalCards === 2) {
+      [newOrder[0], newOrder[1]] = [newOrder[1], newOrder[0]];
+    } else {
+      // For more cards, move from source to target, shifting other cards
+      newOrder.splice(sourceOrderIndex, 1); // Remove from source position
+      newOrder.splice(targetOrderIndex, 0, draggedCard); // Insert at target position
+    }
+    
+    setCardOrder(newOrder);
+    setDraggedCard(null);
+  };
+
+  const handleDrawCards = () => {ort { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { TAROT_CARDS } from '@/Constant/tarot-cards';
@@ -12,24 +95,23 @@ export default function RandomDrawPage() {
   const [showCardSelection, setShowCardSelection] = useState(false);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [revealedCards, setRevealedCards] = useState<
-    { index: number; cardId: number; isReversed?: boolean }[]
-  >([]);
+  const [revealedCards, setRevealedCards] = useState<{ index: number; cardId: number }[]>([]);
   const [isShuffling, setIsShuffling] = useState(false);
   const [cardPositions, setCardPositions] = useState<{ x: number; y: number; rotation: number }[]>(
     []
   );
-  const [cardOrientations, setCardOrientations] = useState<boolean[]>([]); // true for upside down, false for upright
   const [highlightedCardIndexes, setHighlightedCardIndexes] = useState<number[]>([]);
-  // Reference to the placeholder elements
-  const placeholderRefs = useRef<(HTMLDivElement | null)[]>([]);
+  // Thêm state cho drag & drop
+  const [draggedCard, setDraggedCard] = useState<number | null>(null);
+  const [cardOrder, setCardOrder] = useState<number[]>([]);
   const navigate = useNavigate();
 
-  const totalCards = 50; // Total number of cards to render
+  const totalCards = 10; // Total number of cards to render
   const cardWidth = 100;
 
   // Ref for the container element
   const containerRef = useRef<HTMLDivElement>(null);
+  console.log('containerRef', containerRef.current?.offsetWidth);
 
   // Effect to update container width when window is resized
   useEffect(() => {
@@ -55,14 +137,14 @@ export default function RandomDrawPage() {
     // Reset selected cards when card count changes
     setSelectedCards([]);
     setRevealedCards([]);
-    // Initialize placeholder refs array
-    placeholderRefs.current = Array(cardCount).fill(null);
   }, [cardCount]);
 
-  // Initialize card positions
+  // Initialize card positions and order
   useEffect(() => {
     if (showCardSelection) {
       initializeCardPositions();
+      // Initialize card order
+      setCardOrder(Array.from({ length: totalCards }, (_, i) => i));
     }
   }, [showCardSelection, totalCards]);
 
@@ -73,9 +155,6 @@ export default function RandomDrawPage() {
       rotation: 0,
     }));
     setCardPositions(positions);
-
-    // Initialize all cards as upright
-    setCardOrientations(Array(totalCards).fill(false));
   };
 
   const handleContinueToCardSelection = () => {
@@ -95,80 +174,98 @@ export default function RandomDrawPage() {
       // Play card flip sound
       playSound(SOUNDS.CARD_FLIP, 0.4);
 
-      // Generate a random card ID (0-77 for all cards)
+      // Generate a random card ID (0-21 for major arcana)
       const randomCardId = Math.floor(Math.random() * 78);
       setSelectedCards([...selectedCards, index]);
-      // Store the card orientation (upright or reversed) when selected
-      setRevealedCards([
-        ...revealedCards,
-        {
-          index,
-          cardId: randomCardId,
-          isReversed: cardOrientations[index], // Store the orientation
-        },
-      ]);
+      setRevealedCards([...revealedCards, { index, cardId: randomCardId }]);
     }
   };
 
-  // Add placeholder positions state to store calculated positions
-  const [placeholderPositions, setPlaceholderPositions] = useState<{ x: number; y: number }[]>([]);
-
-  // Update placeholder positions when they change
-  useEffect(() => {
-    // Wait for DOM to be ready
-    if (!showCardSelection) return;
-
-    const updatePlaceholderPositions = () => {
-      if (!containerRef.current) return;
-
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const positions = placeholderRefs.current.map(placeholder => {
-        if (!placeholder) return { x: 0, y: 0 };
-
-        const placeholderRect = placeholder.getBoundingClientRect();
-        return {
-          x: placeholderRect.left - containerRect.left + placeholderRect.width / 2 - cardWidth / 2,
-          y: placeholderRect.top - containerRect.top - 52, // Small adjustment
-        };
-      });
-
-      console.log('positions', positions);
-
-      setPlaceholderPositions(positions);
-    };
-
-    // Initial calculation after a slight delay to ensure DOM is ready
-    const timer = setTimeout(updatePlaceholderPositions, 100);
-
-    // Update on window resize
-    window.addEventListener('resize', updatePlaceholderPositions);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', updatePlaceholderPositions);
-    };
-  }, [showCardSelection, cardCount, cardWidth]);
-
-  const handleDrawCards = () => {
-    // In a real app, we would store the question, cardCount, and selectedCards in context or state management
-    // For now we'll just navigate to the results page
-    navigate(ROUTES.RANDOM_RESULTS);
+  const handleReset = () => {
+    setSelectedCards([]);
+    setRevealedCards([]);
+    // Reset card order to original
+    setCardOrder(Array.from({ length: totalCards }, (_, i) => i));
   };
 
-  // End shuffling animation with a highlight effect
-  const completeShuffling = () => {
-    // Set final positions based on whether cards are upright or reversed
-    const finalPositions = Array.from({ length: totalCards }).map((_, i) => {
-      // Add a very small random offset to make it look more natural
-      const smallRandomX = Math.random() * 4 - 2; // Small X adjustment (-2 to 2 pixels)
-      const smallRandomY = Math.random() * 4 - 2; // Small Y adjustment (-2 to 2 pixels)
+  // Drag and drop handlers
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    // Prevent drag when shuffling or already selected
+    if (isShuffling || selectedCards.includes(index)) {
+      e.preventDefault();
+      return;
+    }
+    
+    // Play a soft sound when starting to drag
+    playSound(SOUNDS.CARD_FLIP, 0.2);
+    
+    // Set dragged card
+    setDraggedCard(index);
+    
+    // Set drag image (optional - for custom drag preview)
+    if (e.dataTransfer.setDragImage) {
+      const dragElement = e.currentTarget.cloneNode(true) as HTMLElement;
+      dragElement.style.opacity = '0.8';
+      dragElement.style.transform = 'rotate(5deg) scale(0.9)';
+      dragElement.style.position = 'absolute';
+      dragElement.style.top = '-1000px';
+      document.body.appendChild(dragElement);
+      e.dataTransfer.setDragImage(dragElement, cardWidth / 2, 75);
+      setTimeout(() => document.body.removeChild(dragElement), 0);
+    }
+    
+    // Set data for the drag operation
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', index.toString());
+  };
 
-      return {
-        x: smallRandomX,
-        y: smallRandomY,
-        rotation: cardOrientations[i] ? 180 : 0, // Cards end up upside down or upright
-      };
-    });
+  const handleDragEnd = () => {
+    setDraggedCard(null);
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = (e: React.DragEvent, targetIndex: number) => {
+    e.preventDefault();
+    
+    if (draggedCard === null || draggedCard === targetIndex || isShuffling) {
+      return;
+    }
+    
+    // Play card place sound
+    playSound(SOUNDS.CARD_PLACE, 0.3);
+    
+    // Get the current positions in the order
+    const sourceOrderIndex = cardOrder.indexOf(draggedCard);
+    const targetOrderIndex = cardOrder.indexOf(targetIndex);
+    
+    // Create a new order array by swapping positions
+    const newOrder = [...cardOrder];
+    
+    // Simple swap for two cards
+    if (totalCards === 2) {
+      [newOrder[0], newOrder[1]] = [newOrder[1], newOrder[0]];
+    } else {
+      // For more cards, move from source to target, shifting other cards
+      newOrder.splice(sourceOrderIndex, 1); // Remove from source position
+      newOrder.splice(targetOrderIndex, 0, draggedCard); // Insert at target position
+    }
+    
+    setCardOrder(newOrder);
+    setDraggedCard(null);
+  };
+
+  return (
+    // Set gentle final positions with minimal movement
+    // This prevents the jerky animation
+    const finalPositions = Array.from({ length: totalCards }).map(() => ({
+      x: 0,
+      y: 0,
+      rotation: 0,
+    }));
 
     // Apply the final positioning smoothly
     setCardPositions(finalPositions);
@@ -210,7 +307,7 @@ export default function RandomDrawPage() {
           setTimeout(() => {
             setHighlightedCardIndexes(prev => prev.filter(idx => idx !== index));
           }, 300);
-        }, i * 10); // Increasing delay for cards further from center
+        }, i * 40); // Increasing delay for cards further from center
       });
     }, 300); // Allow time for the smooth animation
   };
@@ -225,12 +322,6 @@ export default function RandomDrawPage() {
 
     // Play shuffle sound
     playSound(SOUNDS.SHUFFLE, 0.5);
-
-    // Randomly determine which cards will end up upside down
-    const newCardOrientations = Array.from({ length: totalCards }).map(
-      () => Math.random() > 0.5 // approximately 50% of cards will be upside down
-    );
-    setCardOrientations(newCardOrientations);
 
     // Keep track of the current position of each card
     // This will make the swapping effect more visible
@@ -274,15 +365,10 @@ export default function RandomDrawPage() {
         // Card i moves to the position of cardPositionsTracker[i]
         const newPosition = basePositions[cardPositionsTracker[i]];
 
-        // Start adding some more dramatic rotation
-        const shouldRotateMore = Math.random() > 0.7; // 30% of cards get more rotation
-
         return {
           x: newPosition.baseX * 0.8, // Reduce horizontal spread
           y: (Math.random() * 40 - 20) * scaleFactor, // More vertical movement, scaled for small screens
-          rotation: shouldRotateMore
-            ? Math.random() * 180 - 90 // More dramatic rotation for some cards
-            : (Math.random() * 20 - 10) * (i % 2 === 0 ? 1 : -1), // Alternating rotation for others
+          rotation: (Math.random() * 20 - 10) * (i % 2 === 0 ? 1 : -1), // Alternating rotation
         };
       });
 
@@ -296,16 +382,11 @@ export default function RandomDrawPage() {
         // Create clear, visible positions that show card swapping
         const secondSwapPositions = Array.from({ length: totalCards }).map((_, i) => {
           const newPosition = basePositions[cardPositionsTracker[i]];
-          const shouldRotateFullCircle = Math.random() > 0.6; // 40% of cards get full rotation
 
           return {
             x: newPosition.baseX * 0.8, // Reduce horizontal spread
             y: (i % 2 === 0 ? 30 : -30) * scaleFactor, // Alternating high/low positions, scaled
-            rotation: shouldRotateFullCircle
-              ? Math.random() > 0.5
-                ? 360
-                : -360 // Full rotation clockwise or counter-clockwise
-              : Math.random() * 40 - 20, // Moderate rotation for other cards
+            rotation: Math.random() * 40 - 20,
           };
         });
 
@@ -318,17 +399,12 @@ export default function RandomDrawPage() {
 
           const thirdSwapPositions = Array.from({ length: totalCards }).map((_, i) => {
             const newPosition = basePositions[cardPositionsTracker[i]];
-            const shouldSpinMultipleTimes = Math.random() > 0.7; // 30% of cards get multiple spins
 
             // Use rotation more than position for visual effect
             return {
               x: newPosition.baseX * 0.9, // Keep horizontal spread minimal
               y: (Math.random() * 40 - 20) * scaleFactor, // Moderate vertical offset, scaled
-              rotation: shouldSpinMultipleTimes
-                ? Math.random() > 0.5
-                  ? 720
-                  : -720 // Some cards spin 2 full rotations
-                : Math.random() * 180 - 90, // Others get varied rotation
+              rotation: Math.random() * 180 - 90, // More dramatic rotation for visual interest
             };
           });
 
@@ -342,12 +418,11 @@ export default function RandomDrawPage() {
             const finalSwapPositions = Array.from({ length: totalCards }).map((_, i) => {
               const newPosition = basePositions[cardPositionsTracker[i]];
 
-              // Start preparing for the final orientation by setting up rotations
-              // that will align or flip the cards as needed
+              // Make positions very clear but start to gather
               return {
                 x: newPosition.baseX * 0.7, // Reduced horizontal movement
                 y: Math.random() * 20 - 10, // Less vertical offset
-                rotation: (cardOrientations[i] ? 160 : 20) + (Math.random() * 40 - 20), // Prepare for final orientation with some variation
+                rotation: Math.random() * 20 - 10, // Less rotation
               };
             });
 
@@ -419,12 +494,8 @@ export default function RandomDrawPage() {
             <p className="text-lg mb-2">
               Select {cardCount} cards that call to you. Trust your intuition.
             </p>
-            <p className="text-sm italic mb-1">
+            <p className="text-sm italic">
               Selected: {selectedCards.length} of {cardCount}
-            </p>
-            <p className="text-xs text-purple-300 italic">
-              Cards will appear in upright or reversed positions, which affects their
-              interpretation.
             </p>
           </div>
 
@@ -443,86 +514,27 @@ export default function RandomDrawPage() {
             >
               {isShuffling ? 'Shuffling...' : 'Shuffle Cards'}
             </Button>
-            <div className="min-h-5">
-              {selectedCards.length === 0 && !isShuffling && (
-                <p className="text-sm text-purple-600 italic">Shuffle the cards before selecting</p>
-              )}
-            </div>
+            {selectedCards.length === 0 && !isShuffling && (
+              <p className="text-sm text-purple-600 italic">Shuffle the cards before selecting</p>
+            )}
           </div>
 
           {/* Card selection area with overlapping cards */}
           <div className="relative py-20">
-            {/* Selected card placeholders */}
-            <div className="mb-8 flex justify-center gap-6 relative">
-              <div className="absolute -top-6 left-0 right-0 text-center text-sm text-purple-700 font-medium">
-                Your Reading Cards
-              </div>
-              {Array.from({ length: cardCount }).map((_, index) => {
-                const selectedCard = selectedCards[index];
-                const hasSelectedCard = selectedCard !== undefined;
-                const cardNumber = index + 1;
-
-                return (
-                  <div
-                    key={`placeholder-${index}`}
-                    ref={el => {
-                      placeholderRefs.current[index] = el;
-                    }}
-                    className={cn(
-                      'w-[100px] h-[150px] rounded-md border-2 transition-all duration-500',
-                      hasSelectedCard
-                        ? 'border-purple-600 bg-purple-900/30 scale-105 shadow-lg shadow-purple-500/30'
-                        : hoveredCard !== null &&
-                          selectedCards.length < cardCount &&
-                          selectedCards.length === index
-                        ? 'border-dashed border-purple-400 bg-purple-200/20 scale-105 shadow-md shadow-purple-300/20 border-opacity-70'
-                        : 'border-dashed border-purple-300 bg-purple-100/20',
-                      'flex flex-col items-center justify-center relative'
-                    )}
-                  >
-                    {!hasSelectedCard && (
-                      <>
-                        <div className="text-purple-400 text-xs text-center mb-1">
-                          {cardCount <= 3
-                            ? ['Past', 'Present', 'Future'][index] || `Card ${cardNumber}`
-                            : `Card ${cardNumber}`}
-                        </div>
-                        <div className="w-12 h-12 rounded-full border-2 border-dashed border-purple-300 flex items-center justify-center text-purple-400 text-lg font-semibold">
-                          {cardNumber}
-                        </div>
-                      </>
-                    )}
-                    {!hasSelectedCard && selectedCards.length === index && (
-                      <div className="absolute -bottom-5 left-0 right-0 text-center">
-                        <div className="inline-block px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full shadow-sm animate-pulse">
-                          Next
-                        </div>
-                      </div>
-                    )}
-                    {hasSelectedCard && (
-                      <div className="absolute inset-0 bg-purple-500/10 rounded-md overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-b from-purple-200/20 to-transparent animate-pulse"></div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
             <div
               ref={containerRef}
               className="flex flex-col justify-center items-center min-h-64 relative mx-auto w-full"
             >
               {Array.from({ length: totalCards }).map((_, index) => {
+                // Map visual index to actual card index using cardOrder
+                const orderIndex = cardOrder.indexOf(index);
                 const isSelected = selectedCards.includes(index);
                 const revealedCard = revealedCards.find(card => card.index === index);
                 const isRevealed = Boolean(revealedCard);
                 const selectedIndex = selectedCards.indexOf(index);
                 let offset = 15; // horizontal offset for each card
 
-                // Calculate the horizontal position for the selected card
-                // We don't need selectedOffset anymore as cards will move to their placeholder positions
-                // const selectedOffset = selectedIndex >= 0 ? selectedIndex * 150 : 0;
+                const selectedOffset = selectedIndex >= 0 ? selectedIndex * 150 : 0;
 
                 if (containerRef.current?.offsetWidth) {
                   const step = Math.abs(
@@ -530,62 +542,60 @@ export default function RandomDrawPage() {
                   );
 
                   if (totalCards * cardWidth <= containerRef.current.offsetWidth) {
-                    offset = (cardWidth + step) * index; // horizontal offset for each card
+                    offset = (cardWidth + step) * orderIndex; // horizontal offset based on card order
                   } else {
-                    offset = (cardWidth - step) * index; // horizontal offset for each card
+                    offset = (cardWidth - step) * orderIndex; // horizontal offset based on card order
                   }
                 }
+
+                const isDragging = draggedCard === index;
+                const isDropTarget = draggedCard !== null && draggedCard !== index;
 
                 return (
                   <div
                     key={index}
                     className={cn(
                       'absolute cursor-pointer transition-all',
-                      isShuffling ? 'duration-800' : isSelected ? 'duration-500' : 'duration-300',
+                      isShuffling ? 'duration-800' : 'duration-300',
                       `transform-gpu w-[${cardWidth}px]`,
-                      isSelected ? `z-[${30 + selectedIndex}]` : `z-10`,
-                      isShuffling
-                        ? 'cursor-not-allowed'
-                        : isSelected
-                        ? ''
-                        : selectedCards.length < cardCount
-                        ? 'cursor-pointer hover:shadow-lg hover:shadow-purple-300/30'
-                        : 'cursor-not-allowed opacity-70',
+                      isSelected ? `z-${30 + selectedIndex}` : isDragging ? 'z-50' : `z-${10 + orderIndex}`,
+                      isShuffling ? 'cursor-not-allowed' : isDragging ? 'cursor-grabbing' : 'cursor-grab',
                       highlightedCardIndexes.includes(index)
-                        ? 'ring-1 rounded-md ring-yellow-400 ring-opacity-80 shadow-xl shadow-yellow-300/40 animate-pulse'
-                        : ''
+                        ? 'ring-4 ring-yellow-400 ring-opacity-80 shadow-xl shadow-yellow-300/40 animate-pulse'
+                        : '',
+                      isDragging ? 'opacity-70 ring-2 ring-blue-400' : '',
+                      isDropTarget ? 'ring-2 ring-dashed ring-blue-300' : ''
                     )}
                     style={{
                       perspective: '1000px',
                       height: '150px',
                       width: `${cardWidth}px`,
-                      transform:
-                        isSelected && selectedIndex !== -1 && placeholderPositions[selectedIndex]
-                          ? `translateX(${placeholderPositions[selectedIndex].x}px) translateY(${
-                              placeholderPositions[selectedIndex].y
-                            }px) ${revealedCard?.isReversed ? 'rotate(180deg)' : ''} scale(1.02)`
-                          : isShuffling
-                          ? `translateX(${offset + cardPositions[index].x}px) translateY(${
-                              cardPositions[index].y
-                            }px) rotate(${cardPositions[index].rotation}deg)`
-                          : hoveredCard === index
-                          ? `translateY(-20px) translateX(${offset}px) ${
-                              !isSelected && cardOrientations[index] ? 'rotate(180deg)' : ''
-                            } scale(1.05)`
-                          : `translateY(0) translateX(${offset}px) ${
-                              !isSelected && cardOrientations[index] ? 'rotate(180deg)' : ''
-                            }`,
+                      transform: isSelected
+                        ? `translateY(-200px) translateX(${selectedOffset}px)`
+                        : isShuffling
+                        ? `translateX(${offset + cardPositions[index].x}px) translateY(${
+                            cardPositions[index].y
+                          }px) rotate(${cardPositions[index].rotation}deg)`
+                        : isDragging
+                        ? `translateY(-40px) translateX(${offset}px) scale(1.05)`
+                        : hoveredCard === index
+                        ? `translateY(-20px) translateX(${offset}px)`
+                        : `translateY(0) translateX(${offset}px)`,
                       left: 'calc(0% - 0px)', // center the cards
-                      transition: isShuffling
-                        ? 'all 0.4s ease-in-out'
-                        : isSelected
-                        ? 'all 0.6s cubic-bezier(0.19, 1, 0.22, 1)'
-                        : 'all 0.1s ease-in-out',
-                      boxShadow: isSelected ? '0 10px 25px -5px rgba(124, 58, 237, 0.5)' : 'none',
+                      transition: isShuffling 
+                        ? 'all 0.8s ease-in-out' 
+                        : isDragging 
+                        ? 'none' // No transition while dragging for responsive feel
+                        : 'all 0.2s ease-in-out',
                     }}
                     onClick={() => !isShuffling && handleCardClick(index)}
-                    onMouseEnter={() => !isShuffling && !isSelected && setHoveredCard(index)}
+                    onMouseEnter={() => !isShuffling && !isSelected && !isDragging && setHoveredCard(index)}
                     onMouseLeave={() => setHoveredCard(null)}
+                    draggable={!isShuffling && !isSelected}
+                    onDragStart={(e) => handleDragStart(e, index)}
+                    onDragEnd={() => handleDragEnd()}
+                    onDragOver={(e) => handleDragOver(e, index)}
+                    onDrop={(e) => handleDrop(e, index)}
                   >
                     <div
                       className={cn(
@@ -639,17 +649,13 @@ export default function RandomDrawPage() {
                             'flex flex-col items-center justify-center p-1'
                           )}
                           style={{
-                            transform: revealedCard.isReversed
-                              ? 'rotateY(180deg) rotate(180deg)' // Flip and rotate for reversed cards
-                              : 'rotateY(180deg)', // Just flip for upright cards
+                            transform: 'rotateY(180deg)',
                             backfaceVisibility: 'hidden',
                           }}
                         >
                           <img
                             src={TAROT_CARDS[revealedCard.cardId].image}
-                            alt={`${TAROT_CARDS[revealedCard.cardId].name} ${
-                              revealedCard.isReversed ? '(Reversed)' : ''
-                            }`}
+                            alt={TAROT_CARDS[revealedCard.cardId].name}
                             className="w-full h-full object-contain rounded"
                           />
                         </div>
@@ -675,6 +681,7 @@ export default function RandomDrawPage() {
               size="lg"
               className="w-1/3 border-purple-500 text-purple-700"
               onClick={() => setSelectedCards([])}
+              onClick={handleReset}
             >
               Reset
             </Button>
