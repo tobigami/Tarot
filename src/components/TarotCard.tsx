@@ -34,20 +34,16 @@ export function TarotCard({
     >
       <div
         className={cn(
-          'bg-gradient-to-br from-purple-100 to-indigo-100 relative',
+          'relative bg-gradient-to-br from-purple-100 to-indigo-100',
           sizeClasses[size],
           card.isReversed && 'rotate-180'
         )}
       >
-        {/* In a real app, this would be an actual image */}
-        <div
-          className={cn(
-            'absolute inset-0 flex items-center justify-center text-center p-2',
-            card.isReversed && 'rotate-180'
-          )}
-        >
-          <span className="text-sm font-medium">{card.name} Image</span>
-        </div>
+        <img
+          src={card.image}
+          alt={card.name}
+          className="absolute inset-0 w-full h-full object-contain"
+        />
       </div>
 
       {showName && (

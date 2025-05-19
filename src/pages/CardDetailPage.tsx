@@ -35,7 +35,8 @@ export default function CardDetailPage() {
           </div>
 
           <div>
-            <h1 className="text-3xl font-bold mb-6">{card.name}</h1>
+            <h1 className="text-3xl font-bold mb-2">{card.name}</h1>
+            {card.suit && <p className="text-lg text-purple-600 mb-4">Suit: {card.suit}</p>}
 
             <div className="mb-6">
               <h2 className="text-xl font-semibold mb-2">Upright Meaning</h2>
