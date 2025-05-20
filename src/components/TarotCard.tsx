@@ -1,4 +1,5 @@
-import type { TarotCard as TarotCardType } from '@/Constant/tarot-cards';
+import { memo } from 'react';
+import type { TarotCardType } from '@/Constant/tarot-cards';
 import { cn } from '@/lib/utils';
 import { ROUTES } from '@/Constant/routes.enum';
 import { Link } from 'react-router-dom';
@@ -11,7 +12,7 @@ interface TarotCardProps {
   className?: string;
 }
 
-export function TarotCard({
+function TarotCardComponent({
   card,
   size = 'md',
   showName = true,
@@ -27,18 +28,12 @@ export function TarotCard({
   const cardContent = (
     <div
       className={cn(
-        'border rounded-lg overflow-hidden flex flex-col items-center transition-all duration-300',
+        'border border-purple-600 rounded-lg overflow-hidden flex flex-col items-center transition-all duration-300 bg-gradient-to-br from-purple-100 to-indigo-100',
         isClickable && 'hover:shadow-lg',
         className
       )}
     >
-      <div
-        className={cn(
-          'relative bg-gradient-to-br from-purple-100 to-indigo-100',
-          sizeClasses[size],
-          card.isReversed && 'rotate-180'
-        )}
-      >
+      <div className={cn('relative mt-1', sizeClasses[size], card.isReversed && 'rotate-180')}>
         <img
           src={card.image}
           alt={card.name}
@@ -47,8 +42,8 @@ export function TarotCard({
       </div>
 
       {showName && (
-        <div className="p-2 text-center">
-          <h3 className="text-sm font-semibold">{card.name}</h3>
+        <div className="p-2 text-center min-h-[3.5rem] flex flex-col justify-center w-full">
+          <h3 className="text-sm font-semibold line-clamp-2">{card.name}</h3>
           {card.isReversed !== undefined && (
             <p className="text-xs text-gray-500">{card.isReversed ? 'Reversed' : 'Upright'}</p>
           )}
@@ -63,3 +58,5 @@ export function TarotCard({
 
   return cardContent;
 }
+
+export const TarotCard = memo(TarotCardComponent);

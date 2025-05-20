@@ -1,7 +1,7 @@
 // This file contains data for all tarot cards
 // In a real app, this would likely be pulled from an API or database
 
-export interface TarotCard {
+export interface TarotCardType {
   id: number;
   name: string;
   image: string;
@@ -11,8 +11,14 @@ export interface TarotCard {
   symbolism: string;
 }
 
+// https://tarotoo.com/wp-content/uploads/card-back-usual-625x1024.jpg-1.webp
+
+export const backCardImage =
+  'https://tarotoo.com/wp-content/uploads/card-back-usual-625x1024.jpg-1.webp';
+
 // A complete tarot deck with 78 cards (22 Major Arcana and 56 Minor Arcana)
-export const TAROT_CARDS: TarotCard[] = [
+
+export const TAROT_CARDS: TarotCardType[] = [
   // Major Arcana (22 cards)
   {
     id: 0,
@@ -784,12 +790,12 @@ export const TAROT_CARDS: TarotCard[] = [
 ];
 
 // Get a card by ID
-export const getCardById = (id: number): TarotCard | undefined => {
+export const getCardById = (id: number): TarotCardType | undefined => {
   return TAROT_CARDS.find(card => card.id === id);
 };
 
 // Get random cards for readings
-export const getRandomCards = (count: number): (TarotCard & { isReversed: boolean })[] => {
+export const getRandomCards = (count: number): (TarotCardType & { isReversed: boolean })[] => {
   const shuffled = [...TAROT_CARDS].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count).map(card => ({
     ...card,
@@ -798,16 +804,16 @@ export const getRandomCards = (count: number): (TarotCard & { isReversed: boolea
 };
 
 // Get cards by suit
-export const getCardsBySuit = (suit: string): TarotCard[] => {
+export const getCardsBySuit = (suit: string): TarotCardType[] => {
   return TAROT_CARDS.filter(card => card.suit === suit);
 };
 
 // Get all Major Arcana cards
-export const getMajorArcanaCards = (): TarotCard[] => {
+export const getMajorArcanaCards = (): TarotCardType[] => {
   return TAROT_CARDS.filter(card => !card.suit);
 };
 
 // Get all Minor Arcana cards
-export const getMinorArcanaCards = (): TarotCard[] => {
+export const getMinorArcanaCards = (): TarotCardType[] => {
   return TAROT_CARDS.filter(card => !!card.suit);
 };

@@ -26,6 +26,6 @@ export const playSound = (soundPath: string, volume = 0.5): HTMLAudioElement => 
 // Sound paths
 export const SOUNDS = {
   SHUFFLE: '/sounds/shuffle-complete.mp3',
-  CARD_FLIP: '/sounds/shuffle-complete.mp3',
+  CARD_FLIP: '/sounds/card-flip.mp3',
   CARD_PLACE: '/sounds/shuffle-complete.mp3',
 };

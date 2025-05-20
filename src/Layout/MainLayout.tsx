@@ -11,7 +11,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               Tarot Reading
             </Link>
 
-            <nav className="flex space-x-6">
+            <nav className="flex space-x-4">
               <Link to={ROUTES.RANDOM_DRAW} className="hover:underline">
                 Random Draw
               </Link>

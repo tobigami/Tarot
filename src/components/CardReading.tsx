@@ -1,4 +1,4 @@
-import type { TarotCard as TarotCardType } from '@/Constant/tarot-cards';
+import type { TarotCardType as TarotCardType } from '@/Constant/tarot-cards';
 import { TarotCard } from './TarotCard';
 
 interface CardReadingProps {
@@ -15,10 +15,57 @@ export function CardReading({ question, cards, interpretation }: CardReadingProp
         <p className="text-lg mt-2">{question}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-items-center">
-        {cards.map(card => (
-          <TarotCard key={card.id} card={card} showName isClickable={false} />
-        ))}
+      {/* Custom card layout with 3 cards on top row and 2 cards on bottom row */}
+      <div className="flex flex-col items-center space-y-8">
+        {cards.length <= 3 ? (
+          // If we have 3 or fewer cards, show them in a single row
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            {cards.map(card => (
+              <div key={card.id} className="w-[120px] md:w-[140px] lg:w-[160px] h-auto">
+                <TarotCard
+                  key={card.id}
+                  card={card}
+                  showName
+                  isClickable={false}
+                  className="h-full"
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          // If we have more than 3 cards, show first 3 on top, rest below
+          <>
+            {/* Top row - first 3 cards */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              {cards.slice(0, 3).map(card => (
+                <div key={card.id} className="w-[120px] md:w-[140px] lg:w-[160px] h-auto">
+                  <TarotCard
+                    key={card.id}
+                    card={card}
+                    showName
+                    isClickable={false}
+                    className="h-full"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom row - remaining cards (up to 2 for a 5-card spread) */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              {cards.slice(3).map(card => (
+                <div key={card.id} className="w-[120px] md:w-[140px] lg:w-[160px] h-auto">
+                  <TarotCard
+                    key={card.id}
+                    card={card}
+                    showName
+                    isClickable={false}
+                    className="h-full"
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       <div className="space-y-6">
@@ -31,7 +78,7 @@ export function CardReading({ question, cards, interpretation }: CardReadingProp
         ))}
       </div>
 
-      <div className="bg-gray-50 p-6 rounded-lg">
+      <div className="">
         <h3 className="text-xl font-semibold mb-4">Overall Reading</h3>
         <p className="text-lg whitespace-pre-line">{interpretation}</p>
       </div>

@@ -1,0 +1,59 @@
+/* Card name label animations */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 7px rgba(180, 120, 255, 0.4), 0 0 3px rgba(255, 215, 130, 0.2) inset;
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(180, 120, 255, 0.6), 0 0 5px rgba(255, 215, 130, 0.4) inset;
+  }
+  100% {
+    box-shadow: 0 0 7px rgba(180, 120, 255, 0.4), 0 0 3px rgba(255, 215, 130, 0.2) inset;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px) translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+}
+
+.card-name-label {
+  animation: fadeIn 0.5s ease-out, glowPulse 3s infinite alternate;
+}
+
+/* Make the labels appear in stacked order */
+.tarot-card:nth-child(1) .card-name-label {
+  z-index: 100;
+}
+.tarot-card:nth-child(2) .card-name-label {
+  z-index: 99;
+}
+.tarot-card:nth-child(3) .card-name-label {
+  z-index: 98;
+}
+.tarot-card:nth-child(4) .card-name-label {
+  z-index: 97;
+}
+.tarot-card:nth-child(5) .card-name-label {
+  z-index: 96;
+}
+.tarot-card:nth-child(6) .card-name-label {
+  z-index: 95;
+}
+.tarot-card:nth-child(7) .card-name-label {
+  z-index: 94;
+}
+.tarot-card:nth-child(8) .card-name-label {
+  z-index: 93;
+}
+.tarot-card:nth-child(9) .card-name-label {
+  z-index: 92;
+}
+.tarot-card:nth-child(10) .card-name-label {
+  z-index: 91;
+}

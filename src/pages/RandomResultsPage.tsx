@@ -1,50 +1,127 @@
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/Constant/routes.enum';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import type { TarotCard as TarotCardType } from '@/Constant/tarot-cards';
-import { getRandomCards } from '@/Constant/tarot-cards';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import type { TarotCardType as TarotCardType } from '@/Constant/tarot-cards';
+import { getCardById } from '@/Constant/tarot-cards';
 import { CardReading } from '@/components/CardReading';
 
+interface LocationState {
+  question: string;
+  selectedCards: {
+    index: number;
+    cardId: number;
+    isReversed?: boolean;
+  }[];
+}
+
 export default function RandomResultsPage() {
-  // In a real app, we would get this data from context, route state, or API
-  const [userQuestion] = useState('What does my career path look like in the next six months?');
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [userQuestion, setUserQuestion] = useState<string>('');
   const [cards, setCards] = useState<(TarotCardType & { isReversed?: boolean })[]>([]);
   const [interpretation, setInterpretation] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Generate random cards on component mount
   useEffect(() => {
-    const randomCards = getRandomCards(3);
-    setCards(randomCards);
+    // Get data from location state (passed from RandomDrawPage)
+    const state = location.state as LocationState;
 
-    // Generate interpretation
-    const interpretationText = generateInterpretation(randomCards, userQuestion);
+    if (!state || !state.question || !state.selectedCards || state.selectedCards.length === 0) {
+      // No data was passed, redirect back to draw page
+      navigate(ROUTES.RANDOM_DRAW);
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Set user question from passed data
+    setUserQuestion(state.question);
+
+    // Convert selected card IDs to actual tarot card objects
+    const selectedTarotCards = state.selectedCards.map(selected => {
+      const tarotCard = getCardById(selected.cardId);
+      if (!tarotCard) {
+        throw new Error(`Card with ID ${selected.cardId} not found`);
+      }
+      return {
+        ...tarotCard,
+        isReversed: selected.isReversed,
+      };
+    });
+
+    setCards(selectedTarotCards);
+
+    // Generate interpretation based on the selected cards
+    const interpretationText = generateInterpretation(selectedTarotCards, state.question);
     setInterpretation(interpretationText);
-  }, [userQuestion]);
 
-  // This would be much more sophisticated in a real app
+    setIsLoading(false);
+  }, [location.state, navigate]);
+
+  // Generate a reading interpretation based on the selected cards
   const generateInterpretation = (
     cards: (TarotCardType & { isReversed?: boolean })[],
-    _question: string
+    question: string
   ) => {
     const cardDescriptions = cards
       .map(card => `${card.name} ${card.isReversed ? 'reversed' : 'upright'}`)
       .join(', ');
 
-    return `With ${cardDescriptions}, your career path in the next six months shows both opportunities and challenges.
+    // Create a more personalized interpretation based on the question
+    let interpretationIntro = '';
+
+    if (
+      question.toLowerCase().includes('love') ||
+      question.toLowerCase().includes('relationship')
+    ) {
+      interpretationIntro = `For your question about love and relationships, the cards ${cardDescriptions} reveal important insights.`;
+    } else if (
+      question.toLowerCase().includes('career') ||
+      question.toLowerCase().includes('job') ||
+      question.toLowerCase().includes('work')
+    ) {
+      interpretationIntro = `Regarding your career path, the cards ${cardDescriptions} show important influences.`;
+    } else if (
+      question.toLowerCase().includes('health') ||
+      question.toLowerCase().includes('wellness')
+    ) {
+      interpretationIntro = `For your health concerns, the cards ${cardDescriptions} provide guidance.`;
+    } else {
+      interpretationIntro = `With ${cardDescriptions}, your reading provides the following insights:`;
+    }
+
+    return `${interpretationIntro}
     
-The cards suggest that you may encounter new opportunities that align with your skills and passions. However, there may be some obstacles to overcome before you can fully realize your potential in your career.
+The cards suggest a journey that combines both challenges and opportunities. Each card in your spread highlights different aspects that influence your situation.
 
-Focus on developing your strengths and addressing any weaknesses that might be holding you back. The cards indicate that with persistence and adaptability, you can make significant progress in your career over the next six months.
+${cards
+  .map(
+    card =>
+      `The ${card.name} ${card.isReversed ? 'reversed' : 'upright'} suggests ${
+        card.isReversed ? card.reversedMeaning.toLowerCase() : card.uprightMeaning.toLowerCase()
+      }.`
+  )
+  .join('\n\n')}
 
-Remember that the cards provide guidance, but your actions and decisions ultimately shape your career path.`;
+Consider how these energies interact with each other and with your question. The cards offer guidance, but remember that you have the power to shape your own path and make choices that align with your highest good.`;
   };
 
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h1 className="text-3xl font-bold mb-10">Loading Your Reading...</h1>
+        <div className="animate-spin h-10 w-10 border-4 border-blue-600 rounded-full border-t-transparent mx-auto"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 max-w-3xl">
       <h1 className="text-3xl font-bold text-center mb-10">Your Tarot Reading</h1>
 
-      <div className="max-w-4xl mx-auto">
+      <div className="space-y-8">
         <CardReading question={userQuestion} cards={cards} interpretation={interpretation} />
 
         <div className="flex flex-wrap gap-4 justify-center mt-10">

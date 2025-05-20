@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/Constant/routes.enum';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { TarotCard as TarotCardType } from '@/Constant/tarot-cards';
+import type { TarotCardType as TarotCardType } from '@/Constant/tarot-cards';
 import { CardReading } from '@/components/CardReading';
 
 // This would come from context or state in a real app
