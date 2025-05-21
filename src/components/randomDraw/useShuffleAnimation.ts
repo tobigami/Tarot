@@ -3,7 +3,9 @@ export interface ShuffleAnimationConfig {
   containerWidth: number;
   onUpdatePositions: (positions: { x: number; y: number; rotation: number }[]) => void;
   onUpdateOrientations: (orientations: boolean[]) => void;
-  onSetHighlightedIndexes: (indexes: number[]) => void;
+  // onSetHighlightedIndexes: (indexes: number[]) => void;
+  onSetHighlightedIndexes: (indexes: number[] | ((prev: number[]) => number[])) => void;
+
   onCompleteShuffling: () => void;
 }
 

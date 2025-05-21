@@ -1,8 +1,6 @@
 import { cn } from '@/lib/utils';
 import type { RefObject } from 'react';
-import { useState } from 'react';
-import { TAROT_CARDS } from '@/Constant/tarot-cards';
-import './CardFlip.css';
+import '@/components/randomDraw/CardFlip.css';
 
 interface CardPlaceholdersProps {
   cardCount: number;
