@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/Constant/routes.enum';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import type { TarotCardType as TarotCardType } from '@/Constant/tarot-cards';
 import { CardReading } from '@/components/CardReading';
@@ -31,6 +31,8 @@ const mockSelectedCards: (TarotCardType & { isReversed?: boolean })[] = [
 export default function CustomResultsPage() {
   // In a real app, we would get this from context, route state, or API
   const [userQuestion] = useState('Will I find a new job opportunity soon?');
+  const [userName, setUserName] = useState('');
+  const [userAge, setUserAge] = useState(0);
   const [cards] = useState(mockSelectedCards);
   const [interpretation] = useState(`
 The Magician upright suggests that you have all the skills and resources 
@@ -45,12 +47,32 @@ Focus on utilizing your skills effectively, while also being patient with the
 process as the wheel turns in your favor.
   `);
 
+  // Load user data from localStorage when component mounts
+  useEffect(() => {
+    const savedUserInfo = localStorage.getItem('tarotUserInfo');
+    if (savedUserInfo) {
+      try {
+        const userInfo = JSON.parse(savedUserInfo);
+        setUserName(userInfo.name || '');
+        setUserAge(userInfo.age || 0);
+      } catch (error) {
+        console.error('Error parsing user info from localStorage:', error);
+      }
+    }
+  }, []);
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-6">Your Custom Tarot Reading</h1>
 
       <div className="max-w-4xl mx-auto">
-        <CardReading question={userQuestion} cards={cards} interpretation={interpretation} />
+        <CardReading
+          question={userQuestion}
+          cards={cards}
+          interpretation={interpretation}
+          userName={userName}
+          userAge={userAge}
+        />
 
         <div className="flex flex-wrap gap-4 justify-center mt-10">
           <Link to={ROUTES.CUSTOM_READING}>

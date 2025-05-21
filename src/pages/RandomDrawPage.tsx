@@ -12,7 +12,7 @@ import CardSelectionActions from '@/components/randomDraw/CardSelectionActions';
 import { usePlaceholderPositions } from '@/components/randomDraw/usePlaceholderPositions';
 import { useShuffleAnimation } from '@/components/randomDraw/useShuffleAnimation';
 
-const totalCards = 30;
+const totalCards = 78;
 const cardWidth = 100;
 const cartHeight = 150;
 
@@ -99,10 +99,25 @@ export default function RandomDrawPage() {
     setCardOrientations(Array(totalCards).fill(false));
   };
 
-  const handleContinueToCardSelection = (questionText: string, count: number) => {
+  const handleContinueToCardSelection = (
+    questionText: string,
+    count: number,
+    name: string,
+    age: number
+  ) => {
     setQuestion(questionText); // Store question for later use in results
     setCardCount(count);
     setShowCardSelection(true);
+
+    // Store user information in state to pass to results page later
+    const userInfo = {
+      name,
+      age,
+      question: questionText,
+    };
+
+    // Save to localStorage for persistence across page reloads
+    localStorage.setItem('tarotUserInfo', JSON.stringify(userInfo));
   };
 
   const handleCardClick = (index: number) => {
@@ -146,6 +161,17 @@ export default function RandomDrawPage() {
   };
 
   const handleDrawCards = () => {
+    // Get user info from localStorage
+    const userInfoString = localStorage.getItem('tarotUserInfo');
+    let name = '';
+    let age = 0;
+
+    if (userInfoString) {
+      const userInfo = JSON.parse(userInfoString);
+      name = userInfo.name;
+      age = userInfo.age;
+    }
+
     // Pass the question and selected cards to the results page
     console.log(`Completing reading for question: ${question}`);
     console.log('revealedCards', revealedCards);
@@ -155,6 +181,8 @@ export default function RandomDrawPage() {
       state: {
         question,
         selectedCards: revealedCards,
+        name,
+        age,
       },
     });
   };

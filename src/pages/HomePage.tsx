@@ -7,8 +7,8 @@ export default function HomePage() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-center mb-10">Tarot Reading</h1>
 
-      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        <div className="border rounded-lg p-6 text-center flex flex-col items-center">
+      <div className="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto">
+        <div className="border rounded-md border-purple-600 p-6 text-center flex flex-col items-center">
           <h2 className="text-2xl font-semibold mb-4">Random Draw</h2>
           <p className="mb-6">
             Draw random tarot cards and get a personalized reading based on your question.
@@ -20,7 +20,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="border rounded-lg p-6 text-center flex flex-col items-center">
+        {/* <div className="border rounded-lg p-6 text-center flex flex-col items-center">
           <h2 className="text-2xl font-semibold mb-4">Custom Reading</h2>
           <p className="mb-6">
             Input your own card selection and get a reading based on your physical cards.
@@ -30,7 +30,7 @@ export default function HomePage() {
               Get Started
             </Button>
           </Link>
-        </div>
+        </div> */}
       </div>
 
       <div className="mt-16 max-w-3xl mx-auto text-center">
