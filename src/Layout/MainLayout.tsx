@@ -15,9 +15,9 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <Link to={ROUTES.RANDOM_DRAW} className="hover:underline">
                 Random Draw
               </Link>
-              <Link to={ROUTES.CUSTOM_READING} className="hover:underline">
+              {/* <Link to={ROUTES.CUSTOM_READING} className="hover:underline">
                 Custom Reading
-              </Link>
+              </Link> */}
               <Link to={ROUTES.CARD_GALLERY} className="hover:underline">
                 Card Gallery
               </Link>
