@@ -14,7 +14,7 @@ export interface TarotCardType {
 // https://tarotoo.com/wp-content/uploads/card-back-usual-625x1024.jpg-1.webp
 
 export const backCardImage =
-  'https://tarotoo.com/wp-content/uploads/card-back-usual-625x1024.jpg-1.webp';
+  'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747891560/ijoyddwmtaootsl7uy0q.webp';
 
 // A complete tarot deck with 78 cards (22 Major Arcana and 56 Minor Arcana)
 
@@ -61,7 +61,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 4,
     name: 'The Emperor',
-    image: '/Cards/04-TheEmperor.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640811/the_emperor.png',
     uprightMeaning: 'Authority, leadership, structure, control, rational thought',
     reversedMeaning: 'Domination, excessive control, rigid boundaries, micromanagement',
     symbolism:
@@ -125,7 +125,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 11,
     name: 'Justice',
-    image: '/Cards/11-Justice.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640835/justice.png',
     uprightMeaning: 'Justice, fairness, truth, cause and effect, law',
     reversedMeaning: 'Unfairness, lack of accountability, dishonesty',
     symbolism:
@@ -143,7 +143,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 13,
     name: 'Death',
-    image: '/Cards/13-Death.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640837/pstyiqatruc11skumx41.png',
     uprightMeaning: 'End of a cycle, transitions, letting go, transformation',
     reversedMeaning: 'Resistance to change, inability to move on, stagnation',
     symbolism:
@@ -170,7 +171,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 16,
     name: 'The Tower',
-    image: '/Cards/16-TheTower.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640839/kij1quaf9cvxt6gqnmgc.png',
     uprightMeaning: 'Sudden change, upheaval, chaos, revelation, awakening',
     reversedMeaning: 'Fear of change, avoiding disaster, delaying the inevitable',
     symbolism:
@@ -179,7 +181,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 17,
     name: 'The Star',
-    image: '/Cards/17-TheStar.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640837/dndlocwhis4rkh9rdewo.png',
     uprightMeaning: 'Hope, faith, purpose, renewal, spirituality',
     reversedMeaning: 'Lack of faith, despair, self-trust, disconnection',
     symbolism:
@@ -188,7 +191,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 18,
     name: 'The Moon',
-    image: '/Cards/18-TheMoon.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640845/adnogmmdjpujoygi3crl.png',
     uprightMeaning: 'Illusion, fear, anxiety, subconscious, intuition',
     reversedMeaning: 'Release of fear, repressed emotion, inner confusion',
     symbolism:
@@ -197,7 +201,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 19,
     name: 'The Sun',
-    image: '/Cards/19-TheSun.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640838/fgptgxm5mnblwumam52z.png',
     uprightMeaning: 'Positivity, fun, warmth, success, vitality',
     reversedMeaning: 'Inner child, feeling down, overly optimistic',
     symbolism:
@@ -206,7 +211,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 20,
     name: 'Judgement',
-    image: '/Cards/20-Judgement.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640844/n8ew09yjdc6uix8gdjnw.png',
     uprightMeaning: 'Rebirth, inner calling, absolution, self-evaluation',
     reversedMeaning: 'Self-doubt, refusal of self-examination, inner critic',
     symbolism:
@@ -226,7 +232,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 22,
     name: 'Ace of Wands',
-    image: '/Cards/Wands01.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640842/xz1kb8kmfw6p67bt7qxs.png',
     suit: 'Wands',
     uprightMeaning: 'Inspiration, creative spark, new initiatives, growth',
     reversedMeaning: 'Creative blocks, delays, lack of enthusiasm',
@@ -236,7 +243,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 23,
     name: 'Two of Wands',
-    image: '/Cards/Wands02.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640843/erwp9duz0ki4ijmpthyf.png',
     suit: 'Wands',
     uprightMeaning: 'Planning, making decisions, leaving comfort, future planning',
     reversedMeaning: 'Fear of change, playing it safe, bad planning',
@@ -246,7 +254,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 24,
     name: 'Three of Wands',
-    image: '/Cards/Wands03.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640843/d2r6v6vgee0o58zxswnj.png',
     suit: 'Wands',
     uprightMeaning: 'Expansion, progress, foresight, overseas opportunities',
     reversedMeaning: 'Obstacle, delays, frustration, lack of foresight',
@@ -256,7 +265,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 25,
     name: 'Four of Wands',
-    image: '/Cards/Wands04.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640843/dygdqzq23emm05dcmwvt.png',
     suit: 'Wands',
     uprightMeaning: 'Celebration, harmony, homecoming, community',
     reversedMeaning: 'Lack of support, transience, home conflicts',
@@ -266,7 +276,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 26,
     name: 'Five of Wands',
-    image: '/Cards/Wands05.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640844/g2gd1d3iqpbplibo2nd9.png',
     suit: 'Wands',
     uprightMeaning: 'Conflict, disagreements, competition, tension',
     reversedMeaning: 'Conflict avoidance, tension release, compromise',
@@ -276,7 +287,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 27,
     name: 'Six of Wands',
-    image: '/Cards/Wands06.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640845/uqvr1qucdtwd9tmvgigw.png',
     suit: 'Wands',
     uprightMeaning: 'Victory, success, public recognition, progress',
     reversedMeaning: 'Fall from grace, egotism, disappointment',
@@ -286,7 +298,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 28,
     name: 'Seven of Wands',
-    image: '/Cards/Wands07.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640844/dukjs7p0olqhngg5m4i0.png',
     suit: 'Wands',
     uprightMeaning: 'Challenge, competition, protection, perseverance',
     reversedMeaning: 'Giving up, overwhelmed, exhaustion',
@@ -296,7 +309,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 29,
     name: 'Eight of Wands',
-    image: '/Cards/Wands08.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640844/vlwvivl7kgo4trcudi1z.png',
     suit: 'Wands',
     uprightMeaning: 'Movement, speed, progress, quick decisions',
     reversedMeaning: 'Obstacles, delays, frustration, stagnation',
@@ -306,7 +320,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 30,
     name: 'Nine of Wands',
-    image: '/Cards/Wands09.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640844/puwho9j2qge5toqmapzx.png',
     suit: 'Wands',
     uprightMeaning: 'Resilience, courage, persistence, last stand',
     reversedMeaning: 'Exhaustion, giving up, too stubborn',
@@ -316,7 +331,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 31,
     name: 'Ten of Wands',
-    image: '/Cards/Wands10.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640845/xfiufgkma7bu3d2gidcn.png',
     suit: 'Wands',
     uprightMeaning: 'Burden, responsibility, hard work, achievement',
     reversedMeaning: 'Avoiding responsibility, delegating, burden sharing',
@@ -326,7 +342,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 32,
     name: 'Page of Wands',
-    image: '/Cards/Wands11.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640845/vjxw9ybzyyceuzbshhe0.png',
     suit: 'Wands',
     uprightMeaning: 'Exploration, excitement, freedom, new ideas',
     reversedMeaning: 'Procrastination, hasty actions, lack of direction',
@@ -336,7 +353,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 33,
     name: 'Knight of Wands',
-    image: '/Cards/Wands12.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640846/u47y6kthez0byyhvxikb.png',
     suit: 'Wands',
     uprightMeaning: 'Action, adventure, fearlessness, impulsivity',
     reversedMeaning: 'Anger, impulsivity, recklessness, setbacks',
@@ -346,7 +364,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 34,
     name: 'Queen of Wands',
-    image: '/Cards/Wands13.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640846/mpfz39xvxc0k1waauptx.png',
     suit: 'Wands',
     uprightMeaning: 'Courage, confidence, determination, social butterfly',
     reversedMeaning: 'Self-doubt, jealousy, insecurity, dependence',
@@ -356,7 +375,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 35,
     name: 'King of Wands',
-    image: '/Cards/Wands14.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640847/drb6qfmyngupdn25unld.png',
     suit: 'Wands',
     uprightMeaning: 'Leadership, vision, entrepreneur, honor',
     reversedMeaning: 'Impulsive, domineering, tyrant, vain pride',
@@ -510,7 +530,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 50,
     name: 'Ace of Swords',
-    image: '/Cards/Swords01.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640837/burzcfgjbbih8geqaqn1.png',
     suit: 'Swords',
     uprightMeaning: 'Breakthrough, clarity, sharp mind, truth',
     reversedMeaning: 'Confusion, brutality, chaos, clouded judgment',
@@ -520,7 +541,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 51,
     name: 'Two of Swords',
-    image: '/Cards/Swords02.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640838/bpb0xuohricng05ssbtx.png',
     suit: 'Swords',
     uprightMeaning: 'Difficult choices, stalemate, indecision, truce',
     reversedMeaning: 'Indecision, confusion, information overload',
@@ -530,7 +552,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 52,
     name: 'Three of Swords',
-    image: '/Cards/Swords03.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640839/cnczkzptygfg0k1kvsrp.png',
     suit: 'Swords',
     uprightMeaning: 'Heartbreak, emotional pain, sorrow, grief',
     reversedMeaning: 'Recovery, forgiveness, moving on',
@@ -540,7 +563,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 53,
     name: 'Four of Swords',
-    image: '/Cards/Swords04.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640838/uzwdp2y6ca4dvu7zuqiq.png',
     suit: 'Swords',
     uprightMeaning: 'Rest, recuperation, contemplation, passive activity',
     reversedMeaning: 'Recovery, awakening, renewal, returning to activity',
@@ -550,7 +574,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 54,
     name: 'Five of Swords',
-    image: '/Cards/Swords05.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640839/zvddyawxhrmxlktwb5d9.png',
     suit: 'Swords',
     uprightMeaning: 'Conflict, disagreements, defeat, winning at all costs',
     reversedMeaning: 'Reconciliation, making amends, desire to resolve conflict',
@@ -560,7 +585,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 55,
     name: 'Six of Swords',
-    image: '/Cards/Swords06.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640839/f81nbt8suiorjlsv1hom.png',
     suit: 'Swords',
     uprightMeaning: 'Transition, moving on, leaving behind, mental progress',
     reversedMeaning: 'Return to trouble, emotional baggage, unresolved issues',
@@ -570,7 +596,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 56,
     name: 'Seven of Swords',
-    image: '/Cards/Swords07.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640839/vkyrvztbzhy3zwjxhpn6.png',
     suit: 'Swords',
     uprightMeaning: 'Deception, strategy, resourcefulness, sneakiness',
     reversedMeaning: 'Confession, conscience, exposure, coming clean',
@@ -580,7 +607,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 57,
     name: 'Eight of Swords',
-    image: '/Cards/Swords08.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640840/r07dxfu7ydkfjlkq4win.png',
     suit: 'Swords',
     uprightMeaning: 'Restriction, imprisonment, self-victimization, isolation',
     reversedMeaning: 'Freedom, self-acceptance, new perspective',
@@ -590,7 +618,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 58,
     name: 'Nine of Swords',
-    image: '/Cards/Swords09.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640840/k7g0olj1owzpyvxgkptd.png',
     suit: 'Swords',
     uprightMeaning: 'Anxiety, worry, fear, depression, nightmares',
     reversedMeaning: 'Inner turmoil, secrets, personal issues',
@@ -600,7 +629,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 59,
     name: 'Ten of Swords',
-    image: '/Cards/Swords10.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640842/jyubdea84lurp5j2wcdy.png',
     suit: 'Swords',
     uprightMeaning: 'Painful endings, deep wounds, betrayal, crisis',
     reversedMeaning: 'Recovery, regeneration, resisting an inevitable end',
@@ -610,7 +640,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 60,
     name: 'Page of Swords',
-    image: '/Cards/Swords11.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640841/lgojkemtvqtvxjcy5ohi.png',
     suit: 'Swords',
     uprightMeaning: 'New ideas, curiosity, thirst for knowledge, new ways of communicating',
     reversedMeaning: 'Deception, manipulation, all talk and no action',
@@ -620,7 +651,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 61,
     name: 'Knight of Swords',
-    image: '/Cards/Swords12.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640841/t2or9mjydwkzrohkwoer.png',
     suit: 'Swords',
     uprightMeaning: 'Action, impulsiveness, defending beliefs, truth at all costs',
     reversedMeaning: 'No direction, disregard for consequences, unprepared',
@@ -630,7 +662,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 62,
     name: 'Queen of Swords',
-    image: '/Cards/Swords13.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640841/kgyjl5rkaip0qrvdxfzh.png',
     suit: 'Swords',
     uprightMeaning: 'Independent, principled, fair, perceptive, direct communication',
     reversedMeaning: 'Overly emotional, cold-hearted, bitter, resentful',
@@ -640,7 +673,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 63,
     name: 'King of Swords',
-    image: '/Cards/Swords14.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640842/kvs3bnbcvv2vsaouggs9.png',
     suit: 'Swords',
     uprightMeaning: 'Intellectual, authority, clear thinking, truth',
     reversedMeaning: 'Power hungry, manipulative, cruel, harsh',
@@ -672,7 +706,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 66,
     name: 'Three of Pentacles',
-    image: '/Cards/Pentacles03.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640831/iszas666hiket4gbhh4j.png',
     suit: 'Pentacles',
     uprightMeaning: 'Teamwork, collaboration, learning, implementation',
     reversedMeaning: 'Lack of teamwork, disorganization, lack of skill',
@@ -742,7 +777,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 73,
     name: 'Ten of Pentacles',
-    image: '/Cards/Pentacles10.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640835/i1w9dnsksmgirpiwawz8.png',
     suit: 'Pentacles',
     uprightMeaning: 'Legacy, family wealth, established success, inheritance',
     reversedMeaning: 'Family disputes, lost inheritance, codependency',
@@ -762,7 +798,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 75,
     name: 'Knight of Pentacles',
-    image: '/Cards/Pentacles12.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640837/qlt7nk6scdoyj7jr5skj.png',
     suit: 'Pentacles',
     uprightMeaning: 'Hard work, reliability, thoroughness, responsibility',
     reversedMeaning: 'Boredom, stagnation, excessive perfectionism',
@@ -772,7 +809,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 76,
     name: 'Queen of Pentacles',
-    image: '/Cards/Pentacles13.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640836/qwxglnwxvsfyiyeqrmtm.png',
     suit: 'Pentacles',
     uprightMeaning: 'Nurturing, practical, provider, security, abundance',
     reversedMeaning: 'Self-centeredness, jealousy, insecurity, materialism',
@@ -782,7 +820,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 77,
     name: 'King of Pentacles',
-    image: '/Cards/Pentacles14.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640836/azrzihijisehapisoblr.png',
     suit: 'Pentacles',
     uprightMeaning: 'Wealth, business, leadership, stability, ambition',
     reversedMeaning: 'Corruption, greed, poor financial decisions',

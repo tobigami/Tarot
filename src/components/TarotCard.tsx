@@ -3,6 +3,7 @@ import type { TarotCardType } from '@/Constant/tarot-cards';
 import { cn } from '@/lib/utils';
 import { ROUTES } from '@/Constant/routes.enum';
 import { Link } from 'react-router-dom';
+import optimizeLinkImage from '@/helper/optimizeLinkImage';
 
 interface TarotCardProps {
   card: TarotCardType & { isReversed?: boolean };
@@ -25,6 +26,12 @@ function TarotCardComponent({
     lg: 'w-48 h-72',
   };
 
+  const widthClasses = {
+    sm: 100,
+    md: 150,
+    lg: 200,
+  };
+
   const cardContent = (
     <div
       className={cn(
@@ -35,7 +42,7 @@ function TarotCardComponent({
     >
       <div className={cn('relative mt-1', sizeClasses[size], card.isReversed && 'rotate-180')}>
         <img
-          src={card.image}
+          src={optimizeLinkImage(card.image, widthClasses[size])}
           alt={card.name}
           className="absolute inset-0 w-full h-full object-contain"
         />

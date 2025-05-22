@@ -4,6 +4,7 @@ import type { RefObject } from 'react';
 import { useState, useEffect } from 'react';
 import './CardFlip.css';
 import './CardLabels.css';
+import optimizeLinkImage from '@/helper/optimizeLinkImage';
 
 interface TarotCardDeckProps {
   totalCards: number;
@@ -189,7 +190,7 @@ export default function TarotCardDeck({
                 }}
               >
                 <img
-                  src={backCardImage}
+                  src={optimizeLinkImage(backCardImage, 100)}
                   alt="Tarot card back"
                   className={cn(
                     'w-full h-full rounded-md shadow-md',
@@ -237,7 +238,7 @@ export default function TarotCardDeck({
                   }}
                 >
                   <img
-                    src={TAROT_CARDS[revealedCard.cardId].image}
+                    src={optimizeLinkImage(TAROT_CARDS[revealedCard.cardId].image, 100)}
                     alt={`${TAROT_CARDS[revealedCard.cardId].name} ${
                       revealedCard.isReversed ? '(Reversed)' : ''
                     }`}
