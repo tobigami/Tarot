@@ -12,7 +12,7 @@ import CardSelectionActions from '@/components/randomDraw/CardSelectionActions';
 import { usePlaceholderPositions } from '@/components/randomDraw/usePlaceholderPositions';
 import { useShuffleAnimation } from '@/components/randomDraw/useShuffleAnimation';
 
-const totalCards = 78;
+const totalCards = 40;
 const cardWidth = 100;
 const cartHeight = 150;
 
@@ -171,10 +171,6 @@ export default function RandomDrawPage() {
       name = userInfo.name;
       age = userInfo.age;
     }
-
-    // Pass the question and selected cards to the results page
-    console.log(`Completing reading for question: ${question}`);
-    console.log('revealedCards', revealedCards);
 
     // Navigate to results page with state containing the reading data
     navigate(ROUTES.RANDOM_RESULTS, {

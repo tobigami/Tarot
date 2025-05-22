@@ -65,7 +65,6 @@ export default function TarotCardDeck({
       } else {
         // Flip the card
         setFlippedCards([...flippedCards, index]);
-        console.log('flippedCards :>> ', flippedCards);
       }
     }
   };

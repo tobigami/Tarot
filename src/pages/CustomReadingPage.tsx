@@ -63,8 +63,6 @@ function CardSelector({
     [allSelectedCards, cardIndex]
   );
 
-  console.log('rrrrrr')
-
   return (
     <div className="space-y-4 bg-purple-50 p-6 rounded-lg shadow-sm border border-purple-100 hover:shadow-md transition-shadow">
       <h3 className="text-lg font-medium text-purple-800">Card {cardIndex + 1}</h3>
@@ -199,24 +197,6 @@ export default function CustomReadingPage() {
   }, []);
 
   const handleGetReading = useCallback(() => {
-    // Prepare the selected card data for passing to results page
-    // In a real app with state management, you would store this data
-    // and retrieve it on the results page
-    const preparedCards = selectedCards
-      .map(card => {
-        const tarotCard = TAROT_CARDS.find(tc => tc.id === card.cardId);
-        if (!tarotCard) return null;
-        return {
-          ...tarotCard,
-          isReversed: card.position === 'reversed',
-        };
-      })
-      .filter(Boolean); // Remove any nulls
-
-    // For demonstration, just log what would be passed
-    console.log('Selected question:', question);
-    console.log('Selected cards:', preparedCards);
-
     // Navigate to results page
     navigate(ROUTES.CUSTOM_RESULTS);
   }, [navigate, selectedCards, question]);
