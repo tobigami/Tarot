@@ -33,7 +33,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 1,
     name: 'The Magician',
-    image: '/Cards/01-TheMagician.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640803/The_Magician.png',
     uprightMeaning: 'Manifestation, resourcefulness, power, inspired action',
     reversedMeaning: 'Manipulation, poor planning, untapped talents',
     symbolism:
@@ -42,7 +42,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 2,
     name: 'The High Priestess',
-    image: '/Cards/02-TheHighPriestess.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640828/the_high_priestess.png',
     uprightMeaning: 'Intuition, sacred knowledge, divine feminine, the subconscious mind',
     reversedMeaning: 'Secrets, disconnected from intuition, withdrawal and silence',
     symbolism:
@@ -51,7 +52,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 3,
     name: 'The Empress',
-    image: '/Cards/03-TheEmpress.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640830/the_empress.png',
     uprightMeaning: 'Femininity, beauty, nature, nurturing, abundance',
     reversedMeaning: 'Creative block, dependence on others, empty-nest syndrome',
     symbolism:
@@ -69,7 +70,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 5,
     name: 'The Hierophant',
-    image: '/Cards/05-TheHierophant.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640807/the_hierophant.png',
     uprightMeaning: 'Spiritual wisdom, religious beliefs, conformity, tradition',
     reversedMeaning: 'Personal beliefs, freedom, challenging the status quo',
     symbolism:
@@ -78,7 +79,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 6,
     name: 'The Lovers',
-    image: '/Cards/06-TheLovers.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640834/the_lovers.png',
     uprightMeaning: 'Love, harmony, relationships, values alignment, choices',
     reversedMeaning: 'Self-love, disharmony, imbalance, misalignment of values',
     symbolism:
@@ -87,7 +88,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 7,
     name: 'The Chariot',
-    image: '/Cards/07-TheChariot.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640815/the_chariot.png',
     uprightMeaning: 'Control, willpower, success, action, determination',
     reversedMeaning: 'Self-discipline, opposition, lack of direction',
     symbolism:
@@ -96,7 +97,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 8,
     name: 'Strength',
-    image: '/Cards/08-Strength.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640829/strength.png',
     uprightMeaning: 'Strength, courage, persuasion, influence, compassion',
     reversedMeaning: 'Inner strength, self-doubt, low energy, raw emotion',
     symbolism:
@@ -105,7 +106,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 9,
     name: 'The Hermit',
-    image: '/Cards/09-TheHermit.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640825/the_hermit.png',
     uprightMeaning: 'Soul-searching, introspection, being alone, inner guidance',
     reversedMeaning: 'Isolation, loneliness, withdrawal',
     symbolism:
@@ -114,7 +115,8 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 10,
     name: 'Wheel of Fortune',
-    image: '/Cards/10-WheelOfFortune.png',
+    image:
+      'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640822/wheel_of_fortune.png',
     uprightMeaning: 'Good luck, karma, life cycles, destiny, a turning point',
     reversedMeaning: 'Bad luck, resistance to change, breaking cycles',
     symbolism:
@@ -132,7 +134,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 12,
     name: 'The Hanged Man',
-    image: '/Cards/12-TheHangedMan.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640829/the_hanged_man.png',
     uprightMeaning: 'Surrender, letting go, new perspectives, enlightenment',
     reversedMeaning: 'Indecision, feeling stuck, delays, resistance',
     symbolism:
@@ -150,7 +152,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 14,
     name: 'Temperance',
-    image: '/Cards/14-Temperance.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640832/temperance.png',
     uprightMeaning: 'Balance, moderation, patience, purpose, meaning',
     reversedMeaning: 'Imbalance, excess, self-healing, realignment',
     symbolism:
@@ -159,7 +161,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 15,
     name: 'The Devil',
-    image: '/Cards/15-TheDevil.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640834/the_devil.png',
     uprightMeaning: 'Shadow self, attachment, addiction, restriction, sexuality',
     reversedMeaning: 'Releasing limiting beliefs, exploring dark thoughts, detachment',
     symbolism:
@@ -213,7 +215,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 21,
     name: 'The World',
-    image: '/Cards/21-TheWorld.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640830/the_world.png',
     uprightMeaning: 'Completion, achievement, travel, fulfillment, lessons learned',
     reversedMeaning: 'Seeking closure, short-cuts, delays',
     symbolism:
@@ -366,7 +368,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 36,
     name: 'Ace of Cups',
-    image: '/Cards/Cups01.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640805/ace_of_cup.png',
     suit: 'Cups',
     uprightMeaning: 'New feelings, intuition, intimacy, love, compassion',
     reversedMeaning: 'Emotional loss, blocked creativity, emptiness',
@@ -376,7 +378,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 37,
     name: 'Two of Cups',
-    image: '/Cards/Cups02.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640806/two_of_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Unity, partnership, mutual attraction, connection',
     reversedMeaning: 'Imbalanced relationships, tension, miscommunication',
@@ -386,7 +388,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 38,
     name: 'Three of Cups',
-    image: '/Cards/Cups03.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640809/three_of_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Celebration, friendship, creativity, community',
     reversedMeaning: 'Overindulgence, gossip, isolation',
@@ -396,7 +398,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 39,
     name: 'Four of Cups',
-    image: '/Cards/Cups04.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640812/4_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Contemplation, apathy, reevaluation, discontent',
     reversedMeaning: 'New beginnings, optimism, acceptance',
@@ -406,7 +408,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 40,
     name: 'Five of Cups',
-    image: '/Cards/Cups05.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640813/5_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Regret, failure, disappointment, pessimism',
     reversedMeaning: 'Moving on, acceptance, renewed hope',
@@ -416,7 +418,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 41,
     name: 'Six of Cups',
-    image: '/Cards/Cups06.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640817/6_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Nostalgia, childhood memories, innocence, joy',
     reversedMeaning: 'Moving forward, leaving past behind',
@@ -426,7 +428,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 42,
     name: 'Seven of Cups',
-    image: '/Cards/Cups07.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640818/7_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Choices, fantasy, illusion, wishful thinking',
     reversedMeaning: 'Clarity, focus, conviction, determination',
@@ -436,7 +438,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 43,
     name: 'Eight of Cups',
-    image: '/Cards/Cups08.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640819/8_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Walking away, disillusionment, leaving behind',
     reversedMeaning: 'Fear of change, fear of loss, staying in a bad situation',
@@ -446,7 +448,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 44,
     name: 'Nine of Cups',
-    image: '/Cards/Cups09.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640821/9_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Contentment, satisfaction, gratitude, wish come true',
     reversedMeaning: 'Inner happiness, materialism, complacency',
@@ -456,7 +458,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 45,
     name: 'Ten of Cups',
-    image: '/Cards/Cups10.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640824/10_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Divine love, harmony, alignment, joy',
     reversedMeaning: 'Broken bonds, disconnection, misaligned values',
@@ -466,7 +468,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 46,
     name: 'Page of Cups',
-    image: '/Cards/Cups11.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640827/page_of_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Creativity, intuition, sensitivity, new ideas',
     reversedMeaning: 'Emotional immaturity, insecurity, disappointment',
@@ -476,7 +478,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 47,
     name: 'Knight of Cups',
-    image: '/Cards/Cups12.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640828/k_of_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Romance, charm, imagination, beauty',
     reversedMeaning: 'Moodiness, disappointment, unrealistic',
@@ -486,7 +488,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 48,
     name: 'Queen of Cups',
-    image: '/Cards/Cups13.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640831/q_of_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Compassion, nurturing, emotional intelligence, intuition',
     reversedMeaning: 'Emotional insecurity, martyrdom, dependency',
@@ -496,7 +498,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 49,
     name: 'King of Cups',
-    image: '/Cards/Cups14.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640831/ki_o_cups.png',
     suit: 'Cups',
     uprightMeaning: 'Emotional balance, compassion, diplomacy',
     reversedMeaning: 'Emotional manipulation, moodiness, selfishness',
@@ -650,7 +652,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 64,
     name: 'Ace of Pentacles',
-    image: '/Cards/Pentacles01.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640831/ace_of_pen.png',
     suit: 'Pentacles',
     uprightMeaning: 'New financial opportunity, manifestation, abundance',
     reversedMeaning: 'Lost opportunity, lack of planning, scarcity mindset',
@@ -660,7 +662,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 65,
     name: 'Two of Pentacles',
-    image: '/Cards/Pentacles02.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640832/2_pen.png',
     suit: 'Pentacles',
     uprightMeaning: 'Balancing resources, adaptation, prioritization',
     reversedMeaning: 'Imbalance, disorganization, overwhelmed',
@@ -680,7 +682,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 67,
     name: 'Four of Pentacles',
-    image: '/Cards/Pentacles04.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640832/4_pen.png',
     suit: 'Pentacles',
     uprightMeaning: 'Security, control, saving money, conservatism',
     reversedMeaning: 'Generosity, giving, spending, insecurity',
@@ -690,7 +692,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 68,
     name: 'Five of Pentacles',
-    image: '/Cards/Pentacles05.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640833/5_pen.png',
     suit: 'Pentacles',
     uprightMeaning: 'Financial loss, poverty, isolation, worry',
     reversedMeaning: 'Recovery, charity, spiritual wealth',
@@ -700,7 +702,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 69,
     name: 'Six of Pentacles',
-    image: '/Cards/Pentacles06.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640833/6_pen.png',
     suit: 'Pentacles',
     uprightMeaning: 'Giving, receiving, sharing wealth, charity, generosity',
     reversedMeaning: 'Selfish, debts, strings attached, stinginess',
@@ -710,7 +712,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 70,
     name: 'Seven of Pentacles',
-    image: '/Cards/Pentacles07.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640834/7_pen.png',
     suit: 'Pentacles',
     uprightMeaning: 'Assessment, evaluation, reflection, long-term view',
     reversedMeaning: 'Wasted effort, procrastination, unrewarded work',
@@ -720,7 +722,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 71,
     name: 'Eight of Pentacles',
-    image: '/Cards/Pentacles08.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640834/8_pen.png',
     suit: 'Pentacles',
     uprightMeaning: 'Dedication, diligence, quality, craftsmanship',
     reversedMeaning: 'Boredom, perfectionism, carelessness, no ambition',
@@ -730,7 +732,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 72,
     name: 'Nine of Pentacles',
-    image: '/Cards/Pentacles09.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640835/9_pen.png',
     suit: 'Pentacles',
     uprightMeaning: 'Luxury, self-sufficiency, independence, refinement',
     reversedMeaning: 'Over-dependence, possessiveness, financial setbacks',
@@ -750,7 +752,7 @@ export const TAROT_CARDS: TarotCardType[] = [
   {
     id: 74,
     name: 'Page of Pentacles',
-    image: '/Cards/Pentacles11.png',
+    image: 'https://res.cloudinary.com/thanhddshopdev/image/upload/v1747640835/p_of_p.png',
     suit: 'Pentacles',
     uprightMeaning: 'Ambition, desire to manifest, practicality, learning',
     reversedMeaning: 'Unrealistic goals, impracticality, boredom, laziness',

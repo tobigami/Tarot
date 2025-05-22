@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/Constant/routes.enum';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react'; // Added useRef
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import type { TarotCardType } from '@/Constant/tarot-cards';
 import { getCardById } from '@/Constant/tarot-cards';
@@ -52,6 +52,9 @@ export default function RandomResultsPage() {
   const [feedbackRating, setFeedbackRating] = useState(0);
   const [isFeedbackSubmitting, setIsFeedbackSubmitting] = useState(false);
 
+  // Ref to handle StrictMode's double useEffect invocation in development
+  const devEffectToggle = useRef(true);
+
   useEffect(() => {
     const fetchTarotReading = async () => {
       // Get data from location state (passed from RandomDrawPage)
@@ -93,14 +96,14 @@ export default function RandomResultsPage() {
         }));
 
         // Call the API for interpretation
-        const isDev = import.meta.env.TYPE === 'dev';
+        const isDevEnv = import.meta.env.DEV; // Consistent check for development
 
         const apiResponse = await createTarotReading(
           state.question,
           tarotCardRequests,
           state.age || 0,
           state.name || '',
-          isDev
+          isDevEnv // Use consistent variable
         );
 
         // Show success notification with the API's message
@@ -146,7 +149,14 @@ export default function RandomResultsPage() {
       }
     };
 
-    fetchTarotReading();
+    if (import.meta.env.DEV) {
+      if (devEffectToggle.current) {
+        fetchTarotReading();
+      }
+      devEffectToggle.current = !devEffectToggle.current;
+    } else {
+      fetchTarotReading(); // Run normally in production
+    }
   }, [location.state, navigate]);
 
   // Generate a fallback reading interpretation if API fails
