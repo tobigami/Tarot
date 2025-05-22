@@ -337,13 +337,42 @@ export default function TarotCardDeck({
                 }}
               >
                 <h3
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 font-medium text-[10px] tracking-wide whitespace-nowrap overflow-hidden text-ellipsis"
+                  className=" font-medium text-[10px]  overflow-hidden"
                   style={{
                     textShadow: '0 0 5px rgba(255, 230, 150, 0.5)',
                     letterSpacing: '0.03em',
                   }}
                 >
-                  ✧ {TAROT_CARDS[revealedCard.cardId].name} ✧{revealedCard.isReversed ? ' (R)' : ''}
+                  <div
+                    className="overflow-hidden"
+                    style={{
+                      width: '120px',
+                      height: '15px',
+                      position: 'relative',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <div
+                      className="text-amber-200 font-mediums"
+                      style={{
+                        animation: 'marquee 5s linear infinite',
+                        display: 'block',
+                        height: '25px',
+                        width: '200%',
+                        position: 'absolute',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      <span className="float-left w-[50%]">
+                        ✧ {TAROT_CARDS[revealedCard.cardId].name} ✧
+                        {revealedCard.isReversed ? ' (R)' : ''}
+                      </span>
+                      <span className="float-left w-[50%]">
+                        ✧ {TAROT_CARDS[revealedCard.cardId].name} ✧
+                        {revealedCard.isReversed ? ' (R)' : ''}
+                      </span>
+                    </div>
+                  </div>
                 </h3>
               </div>
             )}
