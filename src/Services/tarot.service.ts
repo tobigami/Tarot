@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API endpoint configuration
-const API_BASE_URL = import.meta.env.API;
+const API_BASE_URL = import.meta.env.VITE_API;
 
 // Type definitions for request/response
 export type TarotCardPosition = 'upright' | 'reversed';
